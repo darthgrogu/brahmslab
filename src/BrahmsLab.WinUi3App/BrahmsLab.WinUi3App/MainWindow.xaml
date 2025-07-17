@@ -13,7 +13,26 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid>
+    <Grid RowDefinitions="*, Auto">
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+
+            <TextBlock Text="Current Status:"
+                   FontSize="18"
+                   HorizontalAlignment="Center"/>
+
+            <TextBlock Text="{x:Bind ViewModel.StatusText, Mode=OneWay}"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+
+            <Button Content="Execute Status Update"
+                Command="{x:Bind ViewModel.UpdateStatusCommand}"
+                HorizontalAlignment="Center"
+                Padding="20,10"
+                Margin="0,20,0,0"/>
+
+        </StackPanel>
 
     </Grid>
 </Window>
