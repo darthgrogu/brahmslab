@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BrahmsLab.WinUi3App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "BrahmsLab.WinUi3App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
