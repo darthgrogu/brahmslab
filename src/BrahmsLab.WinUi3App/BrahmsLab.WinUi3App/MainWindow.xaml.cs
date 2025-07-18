@@ -1,9 +1,9 @@
 using BrahmsLab.WinUi3App.ViewModels; // <-- Garanta que este using está aqui
-using Microsoft.UI.Xaml;
+using WinUIEx;
 
 namespace BrahmsLab.WinUi3App;
 
-public sealed partial class MainWindow : Window
+public sealed partial class MainWindow : WinUIEx.WindowEx
 {
     public MainWindowViewModel ViewModel { get; }
 
@@ -13,6 +13,5 @@ public sealed partial class MainWindow : Window
     {
         this.InitializeComponent();
         ViewModel = viewModel;
-        this.Title = "BRAHMS Lab";
     }
 }
