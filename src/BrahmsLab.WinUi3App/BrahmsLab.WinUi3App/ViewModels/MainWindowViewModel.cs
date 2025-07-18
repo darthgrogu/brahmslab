@@ -1,5 +1,4 @@
-﻿// ViewModels/MainViewModel.cs
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 
@@ -7,14 +6,15 @@ namespace BrahmsLab.WinUi3App.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    // A anotação na propriedade pública, parcial e com PascalCase.
-    // Esta é a forma correta e recomendada para WinUI 3.
+    public SpectralScanFormViewModel SpectralScanForm { get; }
+
     [ObservableProperty]
     public partial string? StatusText { get; set; }
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(SpectralScanFormViewModel spectralScanFormViewModel)
     {
-        // Acessamos a propriedade pública para definir o valor inicial.
+        SpectralScanForm = spectralScanFormViewModel;
+
         StatusText = "System Ready. Conventions Applied!";
     }
 

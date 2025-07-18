@@ -35,6 +35,8 @@ public partial class App : Application
         {
             // Register ViewModels
             services.AddSingleton<MainWindowViewModel>();
+            services.AddTransient<SpectralScanFormViewModel>();
+
 
             // Register Data Services
             services.AddDbContext<BrahmsLabDbContext>();

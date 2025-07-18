@@ -1,0 +1,29 @@
+<UserControl
+    x:Class="BrahmsLab.WinUi3App.Views.SpectralScanFormView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="20" Spacing="10">
+        <TextBlock Text="New Spectral Scan" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Exsicata Identifier"/>
+        <TextBox Text="{x:Bind ViewModel.ExsicataIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Species Name" Margin="0,10,0,0"/>
+        <TextBox Text="{x:Bind ViewModel.SpeciesName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button Content="Save Scan"
+                Command="{x:Bind ViewModel.SaveScanCommand}"
+                HorizontalAlignment="Left"
+                Margin="0,20,0,0">
+            <Button.Resources>
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="DodgerBlue"/>
+                </ResourceDictionary>
+            </Button.Resources>
+        </Button>
+    </StackPanel>
+</UserControl>
