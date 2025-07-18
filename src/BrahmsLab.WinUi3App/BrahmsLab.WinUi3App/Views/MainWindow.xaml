@@ -18,17 +18,49 @@
     </winex:WindowEx.SystemBackdrop>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-        </Grid.ColumnDefinitions>
+        <NavigationView x:Name="NavigationViewControl"
+                        IsSettingsVisible="True"
+                        PaneDisplayMode="LeftCompact"
+                        IsTitleBarAutoPaddingEnabled="True"
+                        IsBackEnabled="{x:Bind ContentFrame.CanGoBack, Mode=OneWay}"
+                        BackRequested="NavigationViewControl_BackRequested">
 
-        <views:SpectralScanFormView Grid.Column="0" DataContext="{x:Bind ViewModel.SpectralScanForm}" />
+            <NavigationView.MenuItems>
+                <NavigationViewItemHeader Content="Modules"/>
+                <NavigationViewItem Content="Spectral Scan" Tag="SpectralScanPage" Icon="Document"/>
+                <NavigationViewItem Content="Plant Photography" Tag="PhotographyPage" Icon="Camera"/>
+                <NavigationViewItem Content="Mapping" Tag="MappingPage" Icon="Map"/>
+            </NavigationView.MenuItems>
 
-        <Grid Grid.Column="1" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <TextBlock Text="History and Graph will appear here..." 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Center"/>
+            <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated"/>
+            
+        </NavigationView>
+
+        <Grid
+            x:Name="AppTitleBar"
+            Height="48"
+            Margin="48,0,0,0"
+            VerticalAlignment="Top"
+            Padding="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image
+                x:Name="AppFontIcon"
+                Width="16"
+                Height="16"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="/Assets/logo.png" />
+            <TextBlock
+                Margin="12,0,0,0"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="Titlebar DarthGrogu"/>
         </Grid>
+        
     </Grid>
+
 </winex:WindowEx>
