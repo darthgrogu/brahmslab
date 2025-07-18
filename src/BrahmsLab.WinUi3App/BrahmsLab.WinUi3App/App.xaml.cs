@@ -1,50 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿// File: src/4_Shells/BrahmsLab.WinUi3App/App.xaml.cs
+
+using BrahmsLab.Core.Interfaces;
+using BrahmsLab.DataAccess.Data;
+using BrahmsLab.DataAccess.Repositories;
+using BrahmsLab.WinUi3App.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace BrahmsLab.WinUi3App;
 
-namespace BrahmsLab.WinUi3App
+public partial class App : Application
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
-    public partial class App : Application
+    private Window? _window;
+
+    public static new App Current { get; private set; } = default!;
+
+    public IHost Host { get; }
+
+    // Propriedade estática para fácil acesso aos serviços em toda a aplicação
+    public static IServiceProvider Services => Current.Host.Services;
+
+    public App()
     {
-        private Window? _window;
+        InitializeComponent();
 
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App()
+        Current = this;
+
+        Host = Microsoft.Extensions.Hosting.Host.
+        CreateDefaultBuilder().
+        UseContentRoot(AppContext.BaseDirectory).
+        ConfigureServices((context, services) =>
         {
-            InitializeComponent();
+            // Register ViewModels
+            services.AddSingleton<MainWindowViewModel>();
+
+            // Register Data Services
+            services.AddDbContext<BrahmsLabDbContext>();
+            services.AddScoped<ISpectralScanRepository, SpectralScanRepository>();
+
+            // Register Views (our Windows)
+            services.AddTransient<MainWindow>();
+        }).
+        Build();
+    }
+
+    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    {
+        // Usamos a propriedade estática 'Services' para obter a janela.
+        _window = Services.GetService<MainWindow>();
+
+        if (_window == null)
+        {
+            throw new InvalidOperationException("Main window could not be resolved from the service provider.");
         }
 
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
-        {
-            _window = new MainWindow();
-            _window.Activate();
-        }
+        _window.Activate();
     }
 }

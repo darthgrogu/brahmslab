@@ -1,27 +1,18 @@
-using BrahmsLab.WinUi3App.ViewModels;
+using BrahmsLab.WinUi3App.ViewModels; // <-- Garanta que este using está aqui
 using Microsoft.UI.Xaml;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+namespace BrahmsLab.WinUi3App;
 
-namespace BrahmsLab.WinUi3App
+public sealed partial class MainWindow : Window
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainWindow : Window
+    public MainWindowViewModel ViewModel { get; }
+
+    // O ViewModel não é mais criado aqui com "new".
+    // Ele é FORNECIDO pelo container de DI quando a janela é criada.
+    public MainWindow(MainWindowViewModel viewModel)
     {
-        public MainViewModel ViewModel { get; }
-
-        public MainWindow()
-        {
-            this.InitializeComponent();
-
-            // Instantiate the ViewModel.
-            ViewModel = new MainViewModel();
-
-            // We can set the initial window title from here.
-            this.Title = "BRAHMS Lab";
-        }
+        this.InitializeComponent();
+        ViewModel = viewModel;
+        this.Title = "BRAHMS Lab";
     }
 }
