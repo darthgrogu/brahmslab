@@ -1,0 +1,26 @@
+<UserControl
+    x:Class="BrahmsLab.WinUi3App.Views.ScanHistoryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    mc:Ignorable="d">
+
+    <Grid>
+        <controls:DataGrid
+            ItemsSource="{x:Bind ViewModel.Scans}"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            GridLinesVisibility="Horizontal">
+
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn Header="ID" Binding="{Binding LocalId}" Width="SizeToCells"/>
+                <controls:DataGridTextColumn Header="Exsicata" Binding="{Binding ExsicataIdentifier}" Width="*"/>
+                <controls:DataGridTextColumn Header="Species" Binding="{Binding SpeciesName}" Width="2*"/>
+                <controls:DataGridTextColumn Header="Status" Binding="{Binding SyncStatus}" Width="SizeToCells"/>
+            </controls:DataGrid.Columns>
+
+        </controls:DataGrid>
+    </Grid>
+</UserControl>

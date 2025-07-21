@@ -1,12 +1,11 @@
 ﻿using BrahmsLab.Core.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BrahmsLab.Core.Interfaces;
 
-public interface ISpectralScanRepository
+public interface ISpectralScanRepository : IGenericRepository<SpectralScan>
 {
-    Task<SpectralScan?> GetByIdAsync(int localId);
-    Task<List<SpectralScan>> GetAllAsync();
-    Task<SpectralScan> AddAsync(SpectralScan spectralScan);
-    Task UpdateAsync(SpectralScan spectralScan);
-    Task DeleteAsync(int localId);
+    // Example of a future specific method:
+    // Task<List<SpectralScan>> GetScansBySpeciesAsync(string speciesName);
 }
