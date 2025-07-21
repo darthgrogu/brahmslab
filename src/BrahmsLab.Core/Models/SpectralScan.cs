@@ -20,4 +20,5 @@ public class SpectralScan
     public string? ExsicataIdentifier { get; set; }
     public string? SpeciesName { get; set; }
     public DateTime UpdatedAtUtc { get; set; }
+    public string? SpectrumJsonData { get; set; }
 }

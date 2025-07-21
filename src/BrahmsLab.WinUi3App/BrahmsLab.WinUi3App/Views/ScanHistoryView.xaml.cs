@@ -13,7 +13,12 @@ namespace BrahmsLab.WinUi3App.Views
         public ScanHistoryView()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => ViewModel.LoadScansAsync();
+            this.Loaded += ScanHistoryView_LoadedAsync;
+        }
+
+        private async void ScanHistoryView_LoadedAsync(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.LoadScansAsync();
         }
     }
 }
