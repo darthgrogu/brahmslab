@@ -9,6 +9,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 
     <Grid>
-        <views:SpectralScanFormView DataContext="{x:Bind ViewModel.SpectralScanForm}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="320"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <views:SpectralScanFormView 
+            Grid.Column="0" 
+            DataContext="{x:Bind ViewModel.SpectralScanForm}"/>
+
+        <views:ScanHistoryView 
+            Grid.Column="1" 
+            DataContext="{x:Bind ViewModel.ScanHistory}" 
+            Margin="12,0,0,0"/>
+
     </Grid>
 </Page>

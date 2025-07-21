@@ -9,7 +9,11 @@ public class BrahmsLabDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // We'll name our local database file brahmslab.db
-        optionsBuilder.UseSqlite("Data Source=brahmslab.db");
+        var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var dbPath = Path.Combine(appDataFolder, "BrahmsLab", "brahmslab.db");
+
+        Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
+
+        optionsBuilder.UseSqlite($"Data Source={dbPath}");
     }
 }

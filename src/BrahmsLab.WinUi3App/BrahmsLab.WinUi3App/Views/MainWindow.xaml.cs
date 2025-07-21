@@ -1,5 +1,4 @@
-// File: src/4_Shells/BrahmsLab.WinUi3App/MainWindow.xaml.cs
-using Microsoft.UI.Xaml;
+using BrahmsLab.WinUi3App.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
@@ -10,9 +9,13 @@ namespace BrahmsLab.WinUi3App;
 
 public sealed partial class MainWindow : WindowEx
 {
-    public MainWindow()
+    public MainWindowViewModel ViewModel { get; }
+
+    public MainWindow(MainWindowViewModel viewModel)
     {
         this.InitializeComponent();
+
+        ViewModel = viewModel;
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);

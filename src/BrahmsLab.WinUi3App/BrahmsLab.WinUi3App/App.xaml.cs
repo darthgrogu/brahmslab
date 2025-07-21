@@ -37,6 +37,7 @@ public partial class App : Application
             services.AddSingleton<MainWindowViewModel>();
             services.AddTransient<SpectralScanFormViewModel>();
             services.AddTransient<SpectralScanPageViewModel>();
+            services.AddSingleton<ScanHistoryViewModel>();
 
             // Register Data Services
             services.AddDbContext<BrahmsLabDbContext>();
@@ -50,7 +51,6 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        // Usamos a propriedade estática 'Services' para obter a janela.
         _window = Services.GetService<MainWindow>();
 
         if (_window == null)
