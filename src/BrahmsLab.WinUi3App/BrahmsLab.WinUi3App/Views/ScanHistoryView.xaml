@@ -12,7 +12,10 @@
             ItemsSource="{x:Bind ViewModel.Scans}"
             AutoGenerateColumns="False"
             IsReadOnly="True"
-            GridLinesVisibility="Horizontal">
+            GridLinesVisibility="Horizontal"
+            SelectionMode="Extended"
+            SelectionChanged="DataGrid_SelectionChanged">
+            
 
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn Header="ID" Binding="{Binding LocalId}" Width="SizeToCells"/>
