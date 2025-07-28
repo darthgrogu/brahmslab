@@ -106,7 +106,7 @@ public partial class SpectralGraphViewModel : ObservableObject,
                     LineSmoothness = 0.5,
                     // Usa a cor selecionada para a linha
                     Stroke = new SolidColorPaint(currentColor) { StrokeThickness = 2 },
-                    Name = scan.ExsicataIdentifier
+                    Name = "scan.ExsicataIdentifier"
                 });
             }
         }

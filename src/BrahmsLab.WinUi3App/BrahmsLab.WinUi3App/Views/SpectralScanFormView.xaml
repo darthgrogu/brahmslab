@@ -4,26 +4,120 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:viewmodels="using:BrahmsLab.WinUi3App.ViewModels"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:num="using:Windows.Globalization.NumberFormatting"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewmodels:SpectralScanFormViewModel, IsDesignTimeCreatable=False}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel Margin="20" Spacing="10">
-        <TextBlock Text="New Spectral Scan" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+    <UserControl.Resources>
+        <num:DecimalFormatter x:Key="IntegerFormatter" FractionDigits="0" IsGrouped="False"/>
+    </UserControl.Resources>
 
-        <TextBlock Text="Exsicata Identifier"/>
-        <TextBox Text="{x:Bind ViewModel.ExsicataIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+    <ScrollViewer>
+        <StackPanel Margin="24" Spacing="5">
 
-        <TextBlock Text="Species Name" Margin="0,10,0,0"/>
-        <TextBox Text="{x:Bind ViewModel.SpeciesName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Specimen Identification" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,10"/>
 
-        <Button Content="Save"
-                Command="{x:Bind ViewModel.SaveScanCommand}"
-                HorizontalAlignment="Left"
-                Margin="0,20,0,0">
-            <Button.Resources>
-                <ResourceDictionary>
-                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="DodgerBlue"/>
-                </ResourceDictionary>
-            </Button.Resources>
-        </Button>
-    </StackPanel>
+            <TextBlock Text="Herbarium Code"/>
+            <ComboBox ItemsSource="{x:Bind ViewModel.HerbariumCodes}"
+                      SelectedItem="{x:Bind ViewModel.SelectedHerbariumCode, Mode=TwoWay}"
+                      IsEditable="True"
+                      Margin="0,0,0,10"/>
+
+            <TextBlock Text="User Input Code (Barcode, Accession #)"/>
+            <TextBox Text="{x:Bind ViewModel.UserInputCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Measurement Context" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,24,0,10"/>
+
+            <TextBlock Text="Target Class"/>
+            <ComboBox ItemsSource="{x:Bind ViewModel.TargetClasses}"
+                      SelectedItem="{x:Bind ViewModel.SelectedTargetClass, Mode=TwoWay}"
+                      PlaceholderText="Select a target class..."/>
+
+            <TextBlock Text="Background Class" Margin="0,10,0,0"/>
+            <ComboBox ItemsSource="{x:Bind ViewModel.BackgroundClasses}"
+                      SelectedItem="{x:Bind ViewModel.SelectedBackgroundClass, Mode=TwoWay}"
+                      PlaceholderText="Select a background class..."/>
+
+            <TextBlock Text="Developmental Stage" Margin="0,10,0,0"/>
+            <ComboBox ItemsSource="{x:Bind ViewModel.DevelopmentalStages}"
+                      SelectedItem="{x:Bind ViewModel.SelectedDevelopmentalStage, Mode=TwoWay}"
+                      PlaceholderText="Select a developmental stage..."/>
+
+            <TextBlock Text="Measurement Conditions" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,24,0,10"/>
+
+            <ToggleSwitch Header="Low Reflectance Background?"
+                          IsOn="{x:Bind ViewModel.HasLowReflectanceBackground, Mode=TwoWay}"/>
+
+            <ToggleSwitch Header="Background in Measurement?"
+                          IsOn="{x:Bind ViewModel.HasBackgroundInMeasurement, Mode=TwoWay}"/>
+
+            <muxc:NumberBox Header="Percent Background (%)"
+                       Value="{x:Bind ViewModel.PercentBackgroundInMeasurement, Mode=TwoWay}"
+                       Visibility="{x:Bind ViewModel.HasBackgroundInMeasurement, Mode=OneWay}"
+                       SpinButtonPlacementMode="Compact"
+                       SmallChange="1"
+                       NumberFormatter="{StaticResource IntegerFormatter}"
+                       Minimum="0"
+                       Maximum="100"/>
+
+            <TextBlock Text="Glue Present?" Margin="0,10,0,0"/>
+            <ComboBox ItemsSource="{x:Bind ViewModel.PresenceOptions}"
+                      SelectedItem="{x:Bind ViewModel.SelectedHasGlue, Mode=TwoWay}"
+                      PlaceholderText="Select presence..."/>
+
+            <TextBlock Text="Non-Glue Contamination Present?" Margin="0,10,0,0"/>
+            <ComboBox ItemsSource="{x:Bind ViewModel.PresenceOptions}"
+                      SelectedItem="{x:Bind ViewModel.SelectedHasNonGlueContamination, Mode=TwoWay}"
+                      PlaceholderText="Select presence..."/>
+
+            <TextBlock Text="Measurement Flags" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,24,0,10"/>
+
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Flags}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <controls:WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:SelectableFlagViewModel">
+                        <ToggleButton Content="{x:Bind DisplayName}"
+                                      IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                                      Margin="0,0,5,5"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Border BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}" BorderThickness="1" Margin="0,10,0,0" Padding="5">
+                <TextBlock Text="{x:Bind ViewModel.MeasurementFlagsString, Mode=OneWay}"
+                           TextWrapping="Wrap"
+                           Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"
+                           FontStyle="Italic"/>
+            </Border>
+
+            <TextBlock Text="Notes &amp; Tools" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,24,0,10"/>
+
+            <TextBlock Text="Tissue Notes"/>
+            <TextBox Text="{x:Bind ViewModel.TissueNotes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     AcceptsReturn="True" Height="80" TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+            <TextBlock Text="General Comment"/>
+            <TextBox Text="{x:Bind ViewModel.GeneralComment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     AcceptsReturn="True" Height="80" TextWrapping="Wrap"/>
+
+            <Button Content="Mark Tissue Location"
+                    Margin="0,10,0,0"
+                    IsEnabled="False"/>
+
+            <Button Content="Save Scan"
+                    Command="{x:Bind ViewModel.SaveScanCommand}"
+                    HorizontalAlignment="Left"
+                    Margin="0,30,0,0"
+                    Style="{ThemeResource AccentButtonStyle}"/>
+
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
