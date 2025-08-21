@@ -1,0 +1,53 @@
+<UserControl
+    x:Class="BrahmsLab.WinUi3App.Views.SessionWidgetView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:BrahmsLab.WinUi3App.ViewModels"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.WinUI"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewmodels:SessionWidgetViewModel, IsDesignTimeCreatable=True}">
+
+    <Grid ColumnSpacing="16" Padding="12" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+            <TextBlock FontWeight="SemiBold">
+                <Run Text="Project:"/>
+                <Run Text="{x:Bind ViewModel.ProjectId}"/>
+            </TextBlock>
+            <TextBlock FontSize="12" Opacity="0.8">
+                <Run Text="Operator:"/>
+                <Run Text="{x:Bind ViewModel.Operator}"/>
+            </TextBlock>
+            <TextBlock FontSize="12" Opacity="0.8">
+                <Run Text="Instrument:"/>
+                <Run Text="{x:Bind ViewModel.InstrumentModel}"/>
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Grid Width="100" Height="40" ToolTipService.ToolTip="White Reference">
+                <lvc:CartesianChart
+                    Series="{x:Bind ViewModel.WhiteReferenceSeries}"
+                    XAxes="{x:Bind ViewModel.MiniChartXAxes}"
+                    YAxes="{x:Bind ViewModel.WhiteReferenceYAxes}" LegendPosition="Hidden"
+                    TooltipPosition="Hidden"
+                    ZoomMode="None"/>
+            </Grid>
+
+            <Grid Width="100" Height="40" ToolTipService.ToolTip="Black Background">
+                <lvc:CartesianChart
+                    Series="{x:Bind ViewModel.BlackBackgroundSeries}"
+                    XAxes="{x:Bind ViewModel.MiniChartXAxes}"
+                    YAxes="{x:Bind ViewModel.BlackBackgroundYAxes}" LegendPosition="Hidden"
+                    TooltipPosition="Hidden"
+                    ZoomMode="None"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -39,6 +39,9 @@ public partial class App : Application
             services.AddTransient<SpectralScanPageViewModel>();
             services.AddSingleton<ScanHistoryViewModel>();
             services.AddSingleton<SpectralGraphViewModel>();
+            services.AddSingleton<DeviceWidgetViewModel>();
+            services.AddSingleton<SessionWidgetViewModel>();
+            services.AddTransient<ScanPageContextViewModel>();
 
             // Register Data Services
             services.AddDbContext<BrahmsLabDbContext>();
