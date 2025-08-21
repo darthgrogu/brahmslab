@@ -15,7 +15,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\SettingsPage.xaml" />
+    <None Remove="Views\DeviceWidgetView.xaml" />
     <None Remove="Views\ScanHistoryView.xaml" />
+    <None Remove="Views\SessionWidgetView.xaml" />
     <None Remove="Views\SpectralGraphView.xaml" />
     <None Remove="Views\SpectralScanFormView.xaml" />
   </ItemGroup>
@@ -61,6 +63,21 @@
     <ProjectReference Include="..\..\..\..\iscwinform_brahmsapi\Brahms.Api.Client\Brahms.Api.Client.csproj" />
     <ProjectReference Include="..\..\BrahmsLab.Core\BrahmsLab.Core.csproj" />
     <ProjectReference Include="..\..\BrahmsLab.DataAccess\BrahmsLab.DataAccess.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\ScanPageContextView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\SessionWidgetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\DeviceWidgetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\SpectralGraphView.xaml">

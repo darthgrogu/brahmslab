@@ -15,7 +15,8 @@
             XAxes="{x:Bind ViewModel.XAxes}"
             YAxes="{x:Bind ViewModel.YAxes}"
             ZoomMode="X"
-            LegendPosition="Right">
+            LegendPosition="Hidden"
+            TooltipPosition="Hidden">
         </lvc:CartesianChart>
     </Grid>
 </UserControl>

@@ -7,11 +7,16 @@ public partial class SpectralScanPageViewModel : ObservableObject
     public SpectralScanFormViewModel SpectralScanForm { get; }
     public ScanHistoryViewModel ScanHistory { get; }
     public SpectralGraphViewModel Graph { get; }
+    public ScanPageContextViewModel ScanPageContext { get; }
 
-    public SpectralScanPageViewModel(SpectralScanFormViewModel spectralScanForm, ScanHistoryViewModel scanHistory, SpectralGraphViewModel graph)
+    public SpectralScanPageViewModel(SpectralScanFormViewModel spectralScanForm,
+        ScanHistoryViewModel scanHistory,
+        SpectralGraphViewModel graph,
+        ScanPageContextViewModel pageContext)
     {
         SpectralScanForm = spectralScanForm;
         ScanHistory = scanHistory;
         Graph = graph;
+        ScanPageContext = pageContext;
     }
 }

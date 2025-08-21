@@ -9,29 +9,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="320"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <views:SpectralScanFormView 
-            Grid.Column="0" 
-            DataContext="{x:Bind ViewModel.SpectralScanForm}"/>
+        <views:ScanPageContextView Grid.Row="0" DataContext="{x:Bind ViewModel.ScanPageContext}"/>
 
-        <Grid Grid.Column="1" Margin="12,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="320"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-            <views:ScanHistoryView 
-                Grid.Row="0" 
-                DataContext="{x:Bind ViewModel.ScanHistory}"/>
-
-            <views:SpectralGraphView
-                Grid.Row="1"
-                DataContext="{x:Bind ViewModel.Graph}"
-                Margin="0,12,0,0"/>
+            <views:SpectralScanFormView Grid.Column="0" DataContext="{x:Bind ViewModel.SpectralScanForm}"/>
+            <Grid Grid.Column="1" Margin="12,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <views:ScanHistoryView Grid.Row="0" DataContext="{x:Bind ViewModel.ScanHistory}"/>
+                <views:SpectralGraphView Grid.Row="1" DataContext="{x:Bind ViewModel.Graph}" Margin="0,12,0,0"/>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
