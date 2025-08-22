@@ -5,8 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:BrahmsLab.WinUi3App.ViewModels"
+    xmlns:converters="using:BrahmsLab.WinUi3App.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewmodels:DeviceWidgetViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converters:BooleanToStatusBrushConverter x:Key="StatusToBrushConverter"/>
+    </UserControl.Resources>
 
     <Grid ColumnSpacing="12" Padding="12" Height="80" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -16,20 +21,19 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0" 
-               Source="/Assets/micronir.png" 
-               Height="64"
-               Stretch="Uniform"
-               VerticalAlignment="Center"/>
+        <Image Grid.Column="0" Source="/Assets/micronir.png" Height="65" VerticalAlignment="Center"/>
 
-        <Ellipse Grid.Column="1" Width="12" Height="12" Fill="Green" VerticalAlignment="Center"/>
+        <Ellipse Grid.Column="1" Width="12" Height="12"
+                 Fill="{x:Bind ViewModel.IsDeviceConnected, Mode=OneWay, Converter={StaticResource StatusToBrushConverter}}"
+                 VerticalAlignment="Center"/>
 
         <StackPanel Grid.Column="2" VerticalAlignment="Center">
             <TextBlock Text="{x:Bind ViewModel.DeviceName}" FontWeight="SemiBold"/>
-            <TextBlock Text="{x:Bind ViewModel.DeviceStatus}" FontSize="12" Opacity="0.8"/>
+            <TextBlock Text="{x:Bind ViewModel.DeviceStatus, Mode=OneWay}" FontSize="12" Opacity="0.8"/>
         </StackPanel>
 
-        <Button Grid.Column="3" Content="&#xE713;" FontFamily="Segoe Fluent Icons"
-                IsEnabled="False"/>
+        <Button Grid.Column="3" 
+                Content="{x:Bind ViewModel.ConnectButtonText, Mode=OneWay}"
+                Command="{x:Bind ViewModel.ToggleConnectionCommand}"/>
     </Grid>
 </UserControl>
