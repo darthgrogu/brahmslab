@@ -11,6 +11,9 @@
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+            <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
+            <SolidColorBrush x:Key="WindowCaptionBackground">Transparent</SolidColorBrush>
+            <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled">Transparent</SolidColorBrush>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

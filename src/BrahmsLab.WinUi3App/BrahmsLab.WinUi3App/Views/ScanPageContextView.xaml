@@ -1,0 +1,22 @@
+<UserControl
+    x:Class="BrahmsLab.WinUi3App.Views.ScanPageContextView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:BrahmsLab.WinUi3App.Views"
+    mc:Ignorable="d">
+
+    <Grid BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="0,0,0,1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <views:DeviceWidgetView Grid.Column="0"/>
+
+        <views:SessionWidgetView Grid.Column="1"/>
+
+
+    </Grid>
+</UserControl>
