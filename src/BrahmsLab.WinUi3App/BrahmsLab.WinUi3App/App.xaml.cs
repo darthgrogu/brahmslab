@@ -1,8 +1,10 @@
 ﻿// File: src/4_Shells/BrahmsLab.WinUi3App/App.xaml.cs
 
 using BrahmsLab.Core.Interfaces;
+using BrahmsLab.Core.Services;
 using BrahmsLab.DataAccess.Data;
 using BrahmsLab.DataAccess.Repositories;
+using BrahmsLab.WinUi3App.Services;
 using BrahmsLab.WinUi3App.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -49,6 +51,9 @@ public partial class App : Application
 
             // Register Views (our Windows)
             services.AddTransient<MainWindow>();
+
+            // Register other services
+            services.AddSingleton<ISessionService, SessionService>();
         }).
         Build();
     }

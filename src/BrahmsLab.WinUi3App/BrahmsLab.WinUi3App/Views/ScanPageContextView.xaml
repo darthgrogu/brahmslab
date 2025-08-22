@@ -13,9 +13,10 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <views:SessionWidgetView Grid.Column="0"/>
+        <views:DeviceWidgetView Grid.Column="0"/>
 
-        <views:DeviceWidgetView Grid.Column="1"/>
+        <views:SessionWidgetView Grid.Column="1"/>
+
 
     </Grid>
 </UserControl>
