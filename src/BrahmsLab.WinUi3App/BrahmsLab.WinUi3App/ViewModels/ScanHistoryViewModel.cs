@@ -15,7 +15,7 @@ public partial class ScanHistoryViewModel : ObservableObject, IRecipient<Spectra
 
     // This is the collection that our DataGrid will bind to.
     // ObservableCollection automatically notifies the UI when items are added or removed.
-    public ObservableCollection<SpectralScan> Scans { get; } = new();
+    public ObservableCollection<LocalSpectralReading> Scans { get; } = new();
     public ObservableCollection<object> SelectedScans { get; } = new();
 
     public ScanHistoryViewModel(ISpectralScanRepository scanRepository)
@@ -47,7 +47,7 @@ public partial class ScanHistoryViewModel : ObservableObject, IRecipient<Spectra
     private void OnSelectionChanged()
     {
         // Convertemos a lista de 'object' para uma lista de 'SpectralScan'
-        var selected = SelectedScans.OfType<SpectralScan>().ToList();
+        var selected = SelectedScans.OfType<LocalSpectralReading>().ToList();
 
         // Enviamos a mensagem com a lista atual de scans selecionados.
         WeakReferenceMessenger.Default.Send(new SpectralScanSelectionChangedMessage(selected));

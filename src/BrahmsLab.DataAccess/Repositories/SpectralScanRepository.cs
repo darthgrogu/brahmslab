@@ -7,7 +7,7 @@ using BrahmsLab.DataAccess.Data;
 
 namespace BrahmsLab.DataAccess.Repositories;
 
-public class SpectralScanRepository : GenericRepository<SpectralScan>, ISpectralScanRepository
+public class SpectralScanRepository : GenericRepository<LocalSpectralReading>, ISpectralScanRepository
 {
     public SpectralScanRepository(BrahmsLabDbContext context) : base(context){}
 }

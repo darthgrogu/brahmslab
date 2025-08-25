@@ -129,7 +129,7 @@ public partial class SpectralScanFormViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(CanSaveScan))]
     private async Task SaveScanAsync()
     {
-        var newScan = new SpectralScan
+        var newScan = new LocalSpectralReading
         {
             UserInputCode = this.UserInputCode,
             HerbariumCode = this.SelectedHerbariumCode,
