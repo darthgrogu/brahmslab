@@ -65,7 +65,7 @@ public partial class SpectralGraphViewModel : ObservableObject,
 
     public void Receive(SpectralScanSavedMessage message)
     {
-        PlotScans(new List<SpectralScan> { message.Value });
+        PlotScans(new List<LocalSpectralReading> { message.Value });
     }
 
     // ESTE É O NOVO MÉTODO que será chamado quando a seleção na lista mudar
@@ -77,7 +77,7 @@ public partial class SpectralGraphViewModel : ObservableObject,
     }
 
     // Refatoramos a lógica de plotagem para um método reutilizável
-    private void PlotScans(List<SpectralScan> scansToPlot)
+    private void PlotScans(List<LocalSpectralReading> scansToPlot)
     {
         Series.Clear();
         _currentColorIndex = 0; // Reseta o índice de cor toda vez que a plotagem é refeita
@@ -89,9 +89,9 @@ public partial class SpectralGraphViewModel : ObservableObject,
 
         foreach (var scan in scansToPlot)
         {
-            if (string.IsNullOrEmpty(scan.SpectrumJsonData)) continue;
+            if (string.IsNullOrEmpty(scan.SpectralDataJson)) continue;
 
-            var dataPoints = JsonConvert.DeserializeObject<List<double[]>>(scan.SpectrumJsonData);
+            var dataPoints = JsonConvert.DeserializeObject<List<double[]>>(scan.SpectralDataJson);
             if (dataPoints != null)
             {
                 // 3. Pega a próxima cor da paleta

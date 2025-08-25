@@ -5,6 +5,7 @@ using Brahms.Api.Contracts.Helpers;
 using BrahmsLab.Core.Interfaces;
 using BrahmsLab.Core.Messages;
 using BrahmsLab.Core.Models;
+using BrahmsLab.Core.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -129,32 +130,27 @@ public partial class SpectralScanFormViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(CanSaveScan))]
     private async Task SaveScanAsync()
     {
-        var newScan = new SpectralScan
+        var newScan = new LocalSpectralReading
         {
-            UserInputCode = this.UserInputCode,
+            SpecimenId = this.UserInputCode,
             HerbariumCode = this.SelectedHerbariumCode,
-            TargetClass = this.SelectedTargetClass,
-            BackgroundClass = this.SelectedBackgroundClass,
-            TissueDevelopmentalStage = this.SelectedDevelopmentalStage,
+            Comment = this.GeneralComment,
+            SpectralDataJson = GenerateMockSpectrumData(),
+            TargetClass = this.SelectedTargetClass.Value,
+            BackgroundClass = this.SelectedBackgroundClass.Value,
+            TissueDevelopmentalStage = this.SelectedDevelopmentalStage.Value,
+            HasGlue = this.SelectedHasGlue.Value,
+            HasNonGlueContamination = this.SelectedHasNonGlueContamination.Value,
             HasLowReflectanceBackground = this.HasLowReflectanceBackground,
             HasBackgroundInMeasurement = this.HasBackgroundInMeasurement,
             PercentBackgroundInMeasurement = (int?)this.PercentBackgroundInMeasurement,
-            HasGlue = this.SelectedHasGlue,
-            HasNonGlueContamination = this.SelectedHasNonGlueContamination,
             MeasurementFlags = this.MeasurementFlags,
             TissueNotes = this.TissueNotes,
-            GeneralComment = this.GeneralComment,
-
-            // Campos de controlo
-            SyncStatus = SyncStatus.New,
-            Version = 1,
-            UpdatedAtUtc = DateTime.UtcNow,
-            SpectrumJsonData = GenerateMockSpectrumData()
         };
 
-        var savedScan = await _spectralScanRepository.AddAsync(newScan);
+        var savedReading = await _spectralScanRepository.AddAsync(newScan);
 
-        WeakReferenceMessenger.Default.Send(new SpectralScanSavedMessage(savedScan));
+        WeakReferenceMessenger.Default.Send(new SpectralScanSavedMessage(savedReading));
         ClearForm();
     }
 

@@ -1,4 +1,4 @@
-﻿using BrahmsLab.Core.Models;
+﻿/*using BrahmsLab.Core.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BrahmsLab.WinUi3App.ViewModels;
@@ -17,4 +17,4 @@ public partial class SessionViewModel : ObservableObject
     {
         _session = session;
     }
-}
+}*/

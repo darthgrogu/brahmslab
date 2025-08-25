@@ -3,6 +3,7 @@ using System;
 using BrahmsLab.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrahmsLab.DataAccess.Migrations
 {
     [DbContext(typeof(BrahmsLabDbContext))]
-    partial class BrahmsLabDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250825145050_InitialLocalDatabaseSchema")]
+    partial class InitialLocalDatabaseSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
