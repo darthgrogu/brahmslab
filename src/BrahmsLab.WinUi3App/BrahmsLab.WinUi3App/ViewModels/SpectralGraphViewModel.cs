@@ -89,9 +89,9 @@ public partial class SpectralGraphViewModel : ObservableObject,
 
         foreach (var scan in scansToPlot)
         {
-            if (string.IsNullOrEmpty(scan.SpectrumJsonData)) continue;
+            if (string.IsNullOrEmpty(scan.SpectralDataJson)) continue;
 
-            var dataPoints = JsonConvert.DeserializeObject<List<double[]>>(scan.SpectrumJsonData);
+            var dataPoints = JsonConvert.DeserializeObject<List<double[]>>(scan.SpectralDataJson);
             if (dataPoints != null)
             {
                 // 3. Pega a próxima cor da paleta
