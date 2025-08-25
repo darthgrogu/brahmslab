@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrahmsLab.DataAccess.Migrations
 {
     [DbContext(typeof(BrahmsLabDbContext))]
-    [Migration("20250825140355_InitialLocalDatabaseSchema")]
+    [Migration("20250825145050_InitialLocalDatabaseSchema")]
     partial class InitialLocalDatabaseSchema
     {
         /// <inheritdoc />

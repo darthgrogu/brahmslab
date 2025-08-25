@@ -11,9 +11,6 @@ namespace BrahmsLab.DataAccess.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "SpectralScans");
-
             migrationBuilder.CreateTable(
                 name: "LocalSessions",
                 columns: table => new
@@ -100,43 +97,6 @@ namespace BrahmsLab.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "LocalSessions");
-
-            migrationBuilder.CreateTable(
-                name: "SpectralScans",
-                columns: table => new
-                {
-                    LocalId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    BackgroundClass = table.Column<string>(type: "TEXT", nullable: true),
-                    BackgroundDescription = table.Column<string>(type: "TEXT", nullable: true),
-                    GeneralComment = table.Column<string>(type: "TEXT", nullable: true),
-                    HasBackgroundInMeasurement = table.Column<bool>(type: "INTEGER", nullable: false),
-                    HasGlue = table.Column<string>(type: "TEXT", nullable: true),
-                    HasLowReflectanceBackground = table.Column<bool>(type: "INTEGER", nullable: false),
-                    HasNonGlueContamination = table.Column<string>(type: "TEXT", nullable: true),
-                    HerbariumCode = table.Column<string>(type: "TEXT", nullable: true),
-                    MeasurementFlags = table.Column<int>(type: "INTEGER", nullable: false),
-                    MeasurementIndex = table.Column<int>(type: "INTEGER", nullable: false),
-                    Operator = table.Column<string>(type: "TEXT", nullable: true),
-                    PercentBackgroundInMeasurement = table.Column<int>(type: "INTEGER", nullable: true),
-                    ProjectId = table.Column<string>(type: "TEXT", nullable: true),
-                    SessionId = table.Column<string>(type: "TEXT", nullable: true),
-                    SpectrumJsonData = table.Column<string>(type: "TEXT", nullable: true),
-                    SyncStatus = table.Column<int>(type: "INTEGER", nullable: false),
-                    TargetClass = table.Column<string>(type: "TEXT", nullable: true),
-                    TargetTissueId = table.Column<string>(type: "TEXT", nullable: true),
-                    TissueDevelopmentalStage = table.Column<string>(type: "TEXT", nullable: true),
-                    TissueLocationX = table.Column<int>(type: "INTEGER", nullable: true),
-                    TissueLocationY = table.Column<int>(type: "INTEGER", nullable: true),
-                    TissueNotes = table.Column<string>(type: "TEXT", nullable: true),
-                    UpdatedAtUtc = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UserInputCode = table.Column<string>(type: "TEXT", nullable: true),
-                    Version = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SpectralScans", x => x.LocalId);
-                });
         }
     }
 }
